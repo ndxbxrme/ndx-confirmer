@@ -1,0 +1,17 @@
+{
+  "name": "ndx-confirmer",
+  "description": "a simple, customizable confirm dialog box for angular/ndx-framework apps",
+  "main": "build/index.js",
+  "authors": [
+    "ndxbxrme"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ndxbxrme/ndx-confirmer",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
