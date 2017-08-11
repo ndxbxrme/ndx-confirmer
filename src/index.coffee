@@ -79,9 +79,7 @@ module.provider 'confirmer', ->
       myScope.okClass = args.okClass or myScope.okClass
       myScope.cancelClass = args.cancelClass or myScope.cancelClass
       myScope.iconClass = args.iconClass or myScope.iconClass
-      backdropCancel = true
-      if angular.isDefined args.backdropCancel
-        backdropCancel = args.backdropCancel
+      backdropCancel = args.backdropCancel or myScope.backdropCancel
       animTime = 200
       if angular.isDefined args.animTime
         animTime = args.animTime

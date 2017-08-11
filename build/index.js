@@ -40,10 +40,7 @@
             myScope.okClass = args.okClass || myScope.okClass;
             myScope.cancelClass = args.cancelClass || myScope.cancelClass;
             myScope.iconClass = args.iconClass || myScope.iconClass;
-            backdropCancel = true;
-            if (angular.isDefined(args.backdropCancel)) {
-              backdropCancel = args.backdropCancel;
-            }
+            backdropCancel = args.backdropCancel || myScope.backdropCancel;
             animTime = 200;
             if (angular.isDefined(args.animTime)) {
               animTime = args.animTime;
