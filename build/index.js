@@ -11,7 +11,7 @@
     module = angular.module('ndx', []);
   }
 
-  module.provider('confirmer', function() {
+  module.provider('Confirmer', function() {
     var modalOpen, styles, template;
     modalOpen = false;
     styles = "<style type=\"text/css\"> .confirm-backdrop { position: fixed; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; top: 0; left: 0; background: rgba(0,0,0,0.1); transition: 0.1s; opacity: 0; } .confirm-backdrop .confirm-box { width: 240px; margin: 1rem; box-sizing: border-box; padding: 1rem; border-radius: 0.4rem; box-shadow: 0 0.61rem 1.28rem rgba(57,74,88,0.182); background: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 0.2s; opacity: 0; transform: translate3D(0, 50px, 0); } .confirm-backdrop.open { opacity: 1; } .confirm-backdrop.open .confirm-box { opacity: 1; transform: translate3D(0, 0, 0); } </style>";

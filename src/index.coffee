@@ -4,7 +4,7 @@ try
   module = angular.module 'ndx'
 catch e
   module = angular.module 'ndx', []
-module.provider 'confirmer', ->
+module.provider 'Confirmer', ->
   modalOpen = false
   styles = "
     <style type=\"text/css\">
