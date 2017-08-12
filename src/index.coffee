@@ -20,6 +20,7 @@ module.provider 'Confirmer', ->
         background: rgba(0,0,0,0.1);
         transition: 0.1s;
         opacity: 0;
+        z-index: 9999
       }
 
       .confirm-backdrop .confirm-box {
@@ -55,8 +56,8 @@ module.provider 'Confirmer', ->
         <h1 class=\"title\">{{title}}</h1>
         <div class=\"message\">{{message}}</div>
         <div class=\"controls\"> 
-          <button class=\"ok {{okClass}}\" ng-click=\"ok()\">{{okText}}</button>
-          <button class=\"cancel {{cancelClass}}\" ng-click=\"cancel()\">{{cancelText}}</button>
+          <button class=\"btn ok {{okClass}}\" ng-click=\"ok()\">{{okText}}</button>
+          <button class=\"btn cancel {{cancelClass}}\" ng-click=\"cancel()\">{{cancelText}}</button>
         </div>
       </div>
     </div>
