@@ -24,7 +24,6 @@ module.provider 'Confirmer', ->
       }
 
       .confirm-backdrop .confirm-box {
-        width: 240px;
         margin: 1rem;
         box-sizing: border-box;
         padding: 1rem;
