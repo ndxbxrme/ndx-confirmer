@@ -86,7 +86,8 @@
               return close();
             };
             myScope.no = function() {
-              return defer.resolve(false);
+              defer.resolve(false);
+              return close();
             };
             myScope.cancel = function() {
               defer.reject(true);

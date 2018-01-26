@@ -1,6 +1,6 @@
 {
   "name": "ndx-confirmer",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "a simple, customizable confirm dialog box for angular/ndx-framework apps",
   "main": "build/index.js",
   "scripts": {

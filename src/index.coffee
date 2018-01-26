@@ -117,6 +117,7 @@ module.provider 'Confirmer', ->
         close()
       myScope.no = ->
         defer.resolve false
+        close()
       myScope.cancel = ->
         defer.reject true
         close()
