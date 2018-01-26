@@ -15,7 +15,7 @@
     var modalOpen, styles, template;
     modalOpen = false;
     styles = "<style type=\"text/css\"> .confirm-backdrop { position: fixed; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; top: 0; left: 0; background: rgba(0,0,0,0.1); transition: 0.1s; opacity: 0; z-index: 9999 } .confirm-backdrop .confirm-box { margin: 1rem; box-sizing: border-box; padding: 1rem; border-radius: 0.4rem; box-shadow: 0 0.61rem 1.28rem rgba(57,74,88,0.182); background: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 0.2s; opacity: 0; transform: translate3D(0, 50px, 0); } .confirm-backdrop.open { opacity: 1; } .confirm-backdrop.open .confirm-box { opacity: 1; transform: translate3D(0, 0, 0); } </style>";
-    template = "<div class=\"confirm-backdrop {{class}}\" ng-click=\"backdropClick($event)\"> <div class=\"confirm-box\" ng-click=\"boxClick($event)\"><i class=\"{{iconClass}}\">{{iconText}}</i> <h1 class=\"title\">{{title}}</h1> <div class=\"message\">{{message}}</div> <div class=\"controls\"> <button class=\"btn ok {{okClass}}\" ng-click=\"ok()\">{{okText}}</button> <button class=\"btn cancel {{cancelClass}}\" ng-click=\"cancel()\">{{cancelText}}</button> </div> </div> </div>";
+    template = "<div class=\"confirm-backdrop {{class}}\" ng-click=\"backdropClick($event)\"> <div class=\"confirm-box\" ng-click=\"boxClick($event)\"><i class=\"{{iconClass}}\">{{iconText}}</i> <h1 class=\"title\">{{title}}</h1> <div class=\"message\">{{message}}</div> <div class=\"controls\"> <button class=\"btn ok {{okClass}}\" ng-click=\"ok()\">{{okText}}</button> <button class=\"btn no {{noClass}}\" ng-click=\"no()\" ng-show=\"yesNoCancel\">{{noText}}</button> <button class=\"btn cancel {{cancelClass}}\" ng-click=\"cancel()\">{{cancelText}}</button> </div> </div> </div>";
     return {
       setTemplate: function(_template) {
         return template = _template;
@@ -34,12 +34,15 @@
             myScope = (args.scope || $rootScope).$new();
             myScope.message = args.message || myScope.message;
             myScope.title = args.title || myScope.title;
-            myScope.okText = args.okText || myScope.okText || 'OK';
+            myScope.okText = args.okText || myScope.okText || args.yesText || myScope.yesText || 'OK';
+            myScope.noText = args.noText || myScope.noText || 'No';
             myScope.cancelText = args.cancelText || myScope.cancelText || 'Cancel';
             myScope.iconText = args.iconText || myScope.iconText;
-            myScope.okClass = args.okClass || myScope.okClass;
+            myScope.okClass = args.okClass || myScope.okClass || args.yesClass || myScope.yesClass;
+            myScope.noClass = args.noClass || myScope.noClass;
             myScope.cancelClass = args.cancelClass || myScope.cancelClass;
             myScope.iconClass = args.iconClass || myScope.iconClass;
+            myScope.yesNoCancel = args.yesNoCancel || myScope.yesNoCancel;
             backdropCancel = args.backdropCancel || myScope.backdropCancel;
             animTime = 200;
             if (angular.isDefined(args.animTime)) {
@@ -48,6 +51,7 @@
             com = null;
             keyDown = function(ev) {
               if (ev.keyCode === 27) {
+                defer.reject(true);
                 return close();
               }
             };
@@ -80,6 +84,9 @@
             myScope.ok = function() {
               defer.resolve(true);
               return close();
+            };
+            myScope.no = function() {
+              return defer.resolve(false);
             };
             myScope.cancel = function() {
               defer.reject(true);

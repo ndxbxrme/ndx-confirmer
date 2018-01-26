@@ -56,6 +56,7 @@ module.provider 'Confirmer', ->
         <div class=\"message\">{{message}}</div>
         <div class=\"controls\"> 
           <button class=\"btn ok {{okClass}}\" ng-click=\"ok()\">{{okText}}</button>
+          <button class=\"btn no {{noClass}}\" ng-click=\"no()\" ng-show=\"yesNoCancel\">{{noText}}</button>
           <button class=\"btn cancel {{cancelClass}}\" ng-click=\"cancel()\">{{cancelText}}</button>
         </div>
       </div>
@@ -73,12 +74,15 @@ module.provider 'Confirmer', ->
       myScope = (args.scope or $rootScope).$new()
       myScope.message = args.message or myScope.message
       myScope.title = args.title or myScope.title
-      myScope.okText = args.okText or myScope.okText or 'OK'
+      myScope.okText = args.okText or myScope.okText or args.yesText or myScope.yesText or 'OK'
+      myScope.noText = args.noText or myScope.noText or 'No'
       myScope.cancelText = args.cancelText or myScope.cancelText or 'Cancel'
       myScope.iconText = args.iconText or myScope.iconText
-      myScope.okClass = args.okClass or myScope.okClass
+      myScope.okClass = args.okClass or myScope.okClass or args.yesClass or myScope.yesClass
+      myScope.noClass = args.noClass or myScope.noClass
       myScope.cancelClass = args.cancelClass or myScope.cancelClass
       myScope.iconClass = args.iconClass or myScope.iconClass
+      myScope.yesNoCancel = args.yesNoCancel or myScope.yesNoCancel
       backdropCancel = args.backdropCancel or myScope.backdropCancel
       animTime = 200
       if angular.isDefined args.animTime
@@ -86,6 +90,7 @@ module.provider 'Confirmer', ->
       com = null
       keyDown = (ev) ->
         if ev.keyCode is 27
+          defer.reject true
           close()
       close = ->
         com.removeClass 'open'
@@ -110,6 +115,8 @@ module.provider 'Confirmer', ->
       myScope.ok = ->
         defer.resolve true
         close()
+      myScope.no = ->
+        defer.resolve false
       myScope.cancel = ->
         defer.reject true
         close()
